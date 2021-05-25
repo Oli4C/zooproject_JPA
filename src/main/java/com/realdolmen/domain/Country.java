@@ -8,6 +8,10 @@ public class Country {
         this.id = id;
         this.name = name;
     }
+    public Country() {
+    }
+
+
 
     public int getId() {
         return id;

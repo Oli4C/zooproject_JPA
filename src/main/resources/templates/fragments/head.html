@@ -13,6 +13,8 @@
       var elem = document.querySelectorAll('.sidenav');
       var options = {edge: "left", preventScrolling: true};
       var instances = M.Sidenav.init(elem, options);
+      var elems2 = document.querySelectorAll('select');
+      M.FormSelect.init(elems2, {});
     });
   </script>
   <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
@@ -24,7 +26,7 @@
 <div th:fragment="nav">
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Zoo project</a>
+      <a href="/" class="brand-logo center">Zoo project</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a style="display:unset" href="#" data-target="slide-out" class="sidenav-trigger"><i
                 class="material-icons">menu</i></a></li>
@@ -37,20 +39,25 @@
       <li>
         <div class="user-view">
           <div class="background">
-            <img src="images/office.jpg">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.comfortinnattheharbor.com%2Fresourcefiles%2Fmainimages%2Fsan-diego-zoo-at-california-top.jpg&f=1&nofb=1">
           </div>
-          <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-          <a href="#name"><span class="white-text name">John Doe</span></a>
-          <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+          <a href="#user"><img class="circle" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.C9mKc4LHH06RUDjgiqRgxgAAAA%26pid%3DApi&f=1"></a>
+          <a href="#name"><span class="black-text name">Unknown user</span></a>
+          <a href="#email"><span class="black-text email">E-mailaddress</span></a>
         </div>
       </li>
-      <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-      <li><a href="#!">Second Link</a></li>
-      <li>
-        <div class="divider"></div>
-      </li>
+      <li><a href="/addAnimal">Add an animal</a></li>
+      <li><a href="/addCountry">Add a country</a></li>
+      <li><a href="/addFood">Add food</a></li>
+
+      <li><div class="divider"></div></li>
       <li><a class="subheader">Subheader</a></li>
-      <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+      <li><a class="waves-effect" href="www.vdab.be">VDAB Website</a></li>
+      <li><a class="waves-effect" href="https://www.realdolmen.com/nl">Inetum - RealDolmen</a></li>
+
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Also worth checking</a></li>
+      <li><a class="waves-effect" href="https://www.youtube.com/watch?v=JFYVcz7h3o0">Vibes to chill to</a></li>
     </ul>
 
   </div>
