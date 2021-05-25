@@ -33,7 +33,7 @@
                 <label for="foods">Select food(s)</label>
                 <select multiple class="form-control" th:field="*{foods}" id="foods">
                     <option th:each="food : ${foods}" th:text="${food.getFoodName()}"
-                            th:value="${food.getId()}"> option
+                            th:value="${{food}}"> option
                     </option>
                 </select>
             </div>

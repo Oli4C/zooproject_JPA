@@ -20,4 +20,12 @@ public class FoodService {
     public void updateFoodName(int id, String foodName) {
         foodRepository.updateFoodName(id, foodName);
     }
+
+    public Food findById(Integer id) {
+        return foodRepository.findById(id);
+    }
+
+    public void addFood(String foodName){
+        foodRepository.addFood(foodName);
+    }
 }

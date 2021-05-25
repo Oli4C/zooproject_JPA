@@ -88,4 +88,48 @@ public class FoodRepository {
             }
         }
     }
+
+    public void addFood(String foodName) {
+        Connection myConnection = null;
+        try {
+            myConnection = DriverManager.getConnection(url, user, password);
+            PreparedStatement myStatement = myConnection.prepareStatement("insert into Food where name=?");
+            myStatement.setString(1, foodName);
+            myStatement.execute();
+        } catch (SQLException e) {
+            while (e != null) {
+                try {
+                    myConnection.rollback();
+                    System.out.println(e);
+                    e = e.getNextException();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        } finally {
+            try {
+                myConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+
+    public Food findById(Integer id) {
+        try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
+            PreparedStatement myStatement = myConnection.prepareStatement("select * from Food where id = ?");//Remember always use a parameterized (?) query, if you need to add values in your query!
+            myStatement.setInt(1, id);
+            myStatement.execute();
+            ResultSet resultSet = myStatement.getResultSet();
+            resultSet.next();
+            return new Food(resultSet.getInt("id"), resultSet.getString("foodName"));
+        } catch (SQLException e) {
+            while (e != null) {
+                System.out.println(e);
+                e = e.getNextException();
+            }
+            return null;
+        }
+    }
 }
