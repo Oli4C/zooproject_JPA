@@ -32,4 +32,8 @@ public class TigerService {
         tiger.setFoods(foodRepository.findAllFoodByAnimalId(tiger.getId()));
         return tiger;
     }
+
+    public void updateTiger(Tiger tiger){
+        tigerRepository.updateTigerById(tiger);
+    }
 }

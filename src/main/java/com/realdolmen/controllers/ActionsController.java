@@ -19,7 +19,7 @@ public class ActionsController {
 
     @PostMapping(value = "/edit/{id}")
     public String editTiger(@ModelAttribute Tiger tiger){
-        tigerService.addATiger(tiger);
+        tigerService.updateTiger(tiger);
         return "redirect:/";
     }
 

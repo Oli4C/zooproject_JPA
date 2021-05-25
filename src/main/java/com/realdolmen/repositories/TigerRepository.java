@@ -100,22 +100,20 @@ public class TigerRepository {
         }
     }
 
-    public Tiger updateTigerById(int id) {
+    public void updateTigerById(Tiger tiger) {
         Connection myConnection = null;
         try {
             myConnection = DriverManager.getConnection(url, user, password);
-            PreparedStatement myStatement = myConnection.prepareStatement("update  from Tiger as t inner join Country as c on t.countryId=c.id where t.id = ? ");
-            myStatement.setInt(1, id);
+            PreparedStatement myStatement = myConnection.prepareStatement("update Tiger set name = ? where id=?");
+            myStatement.setString(1, tiger.getName());
+//            myStatement.setInt(2, tiger.getCountry().getId());
+            myStatement.setInt(2, tiger.getId());
             myStatement.execute();
-            ResultSet myResultSet = myStatement.getResultSet();
-            myResultSet.next();
-            Country country = new Country(myResultSet.getInt("c.id"), myResultSet.getString("c.name"));
-            Tiger tiger = new Tiger(myResultSet.getString("t.name"), myResultSet.getInt("t.id"), country);
-            return tiger;
+
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+
         } finally {//FINALLY, always gets executed even when there's an Exception. (Could be an OCA exam question)
             try {
                 myConnection.close();//Always close the connection to the database, because it can cause memory leaks https://en.wikipedia.org/wiki/Memory_leak

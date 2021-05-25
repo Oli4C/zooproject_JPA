@@ -21,6 +21,11 @@ public class Tiger {
         this.id = id;
         this.country = country;
     }
+//    public Tiger(String name, int id) { //constructor
+//        this.name = name;
+//        this.id = id;
+//
+//    }
 
 
     public Tiger(String name) { //overloading, andere parameters dan boven (name, id)
