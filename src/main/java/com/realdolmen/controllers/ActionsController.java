@@ -41,4 +41,10 @@ public class ActionsController {
         return "redirect:/";
     }
 
+    @GetMapping(value= "/remove/{id}")
+    public String deleteAGame(@PathVariable("id") int id) {
+        tigerService.removeById(id);
+        return "redirect:/";
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.realdolmen.services;
 
+import com.realdolmen.domain.Food;
 import com.realdolmen.domain.Tiger;
 import com.realdolmen.repositories.FoodRepository;
 import com.realdolmen.repositories.NotFoundException;
@@ -14,7 +15,7 @@ public class TigerService {
     private FoodRepository foodRepository = new FoodRepository();
 
 
-    public List<Tiger> getTigers()  {
+    public List<Tiger> getTigers() {
         List<Tiger> tigers = tigerRepository.getTigersFromDb();
         for (Tiger tiger : tigers) {
             tiger.setFoods(foodRepository.findAllFoodByAnimalId(tiger.getId()));
@@ -24,9 +25,10 @@ public class TigerService {
 
 
     public void addATiger(Tiger tiger) {
-
-
         tigerRepository.addATigerInDb(tiger);
+        for(Food food : tiger.getFoods()){
+            foodRepository.saveFoodForAnimalId(food,tiger.getId());
+        }
     }
 
     public Tiger findById(int id) {
@@ -35,7 +37,12 @@ public class TigerService {
         return tiger;
     }
 
-    public void updateTiger(Tiger tiger){
+    public void updateTiger(Tiger tiger) {
         tigerRepository.updateTigerById(tiger);
+
+    }
+
+    public void removeById(int id) {
+        tigerRepository.removeById(id);
     }
 }

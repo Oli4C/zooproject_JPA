@@ -24,8 +24,4 @@ public class FoodService {
     public Food findById(Integer id) {
         return foodRepository.findById(id);
     }
-
-    public void addFood(String foodName){
-        foodRepository.addFood(foodName);
-    }
 }

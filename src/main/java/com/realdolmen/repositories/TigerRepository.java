@@ -44,16 +44,18 @@ public class TigerRepository {
 
     public void addATigerInDb(Tiger tiger) {
         Connection myConnection = null;
-        try { //TRY out this block of code, if an exception occurs it can be caught in the CATCH block
+        try {
             myConnection = DriverManager.getConnection(url, user, password);
-            //INSERT INTO table_name (column1, column2, column3, ...)
-            //VALUES (value1, value2, value3, ...);
-            myConnection.setAutoCommit(false); //Since we want to use Transactions, we have to set AutoCommit to false.
-            PreparedStatement myStatement = myConnection.prepareStatement("insert into Tiger(name, countryId) values (?,?)");
+            myConnection.setAutoCommit(false);
+            PreparedStatement myStatement = myConnection.prepareStatement("insert into Tiger(name, countryId) values (?,?)", Statement.RETURN_GENERATED_KEYS);
             myStatement.setString(1, tiger.getName());
             myStatement.setInt(2, tiger.getCountry().getId());
-            myStatement.execute();//executes the query
-            myConnection.commit();// at the end of the try block, this commits the Data to the DB and makes it permanent
+            myStatement.execute();
+            myConnection.commit();
+            ResultSet rs = myStatement.getGeneratedKeys();
+            rs.next();
+            int generatedId = rs.getInt(1);
+            tiger.setId(generatedId);
         } catch (SQLException e) {//CATCH the exception and handle it in this catch block
             while (e != null) {//SQLException can contain nested exceptions, that's why we use the while loop to loop over each exception
                 try {
@@ -102,9 +104,8 @@ public class TigerRepository {
         Connection myConnection = null;
         try {
             myConnection = DriverManager.getConnection(url, user, password);
-            PreparedStatement myStatement = myConnection.prepareStatement("update Tiger set name = ? where id=?");
+            PreparedStatement myStatement = myConnection.prepareStatement("update Tiger set name = ? where id = ? ");
             myStatement.setString(1, tiger.getName());
-//            myStatement.setInt(2, tiger.getCountry().getId());
             myStatement.setInt(2, tiger.getId());
             myStatement.execute();
 
@@ -121,4 +122,14 @@ public class TigerRepository {
         }
     }
 
+    public void removeById(int id) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from Tiger where id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

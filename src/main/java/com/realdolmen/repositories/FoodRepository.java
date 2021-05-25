@@ -40,7 +40,7 @@ public class FoodRepository {
         List<Food> foodList = new ArrayList<>(); /*I've put my list here, so I can also use it in the catch block.
          In that case it will just return an empty list instead of null. That way my application is less prone to NullPointerExceptions . */
         try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
-            PreparedStatement myStatement = myConnection.prepareStatement("select * from Food where animalId = ?");//Remember always use a parameterized (?) query, if you need to add values in your query!
+            PreparedStatement myStatement = myConnection.prepareStatement("select * from Food as f inner join TigerFood as tf on tf.foodId = f.id where tf.tigerId = ?");//Remember always use a parameterized (?) query, if you need to add values in your query!
             myStatement.setInt(1, animalId);
             ResultSet myResultSet = myStatement.executeQuery();
             while (myResultSet.next()) {
@@ -89,33 +89,6 @@ public class FoodRepository {
         }
     }
 
-    public void addFood(String foodName) {
-        Connection myConnection = null;
-        try {
-            myConnection = DriverManager.getConnection(url, user, password);
-            PreparedStatement myStatement = myConnection.prepareStatement("insert into Food where name=?");
-            myStatement.setString(1, foodName);
-            myStatement.execute();
-        } catch (SQLException e) {
-            while (e != null) {
-                try {
-                    myConnection.rollback();
-                    System.out.println(e);
-                    e = e.getNextException();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        } finally {
-            try {
-                myConnection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-    }
-
-
     public Food findById(Integer id) {
         try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
             PreparedStatement myStatement = myConnection.prepareStatement("select * from Food where id = ?");//Remember always use a parameterized (?) query, if you need to add values in your query!
@@ -130,6 +103,20 @@ public class FoodRepository {
                 e = e.getNextException();
             }
             return null;
+        }
+    }
+
+    public void saveFoodForAnimalId(Food food, int id) {
+        try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
+            PreparedStatement myStatement = myConnection.prepareStatement("insert  into TigerFood(tigerId,foodId) values(?,?) ");//Remember always use a parameterized (?) query, if you need to add values in your query!
+            myStatement.setInt(1, id);
+            myStatement.setInt(2, food.getId());
+            myStatement.execute();
+        } catch (SQLException e) {
+            while (e != null) {
+                System.out.println(e);
+                e = e.getNextException();
+            }
         }
     }
 }
