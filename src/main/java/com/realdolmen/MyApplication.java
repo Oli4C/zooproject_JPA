@@ -15,10 +15,6 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class MyApplication {
-    private static Scanner scanner = new Scanner(System.in); //private static outside of main, so it can be used in every method
-    private static TigerService tigerService = new TigerService();// this creates an instance of TigerService
-    private static FoodService foodService = new FoodService();// this creates an instance of FoodService
-
     public static void main(String[] args) {
         SpringApplication.run(MyApplication.class);
 

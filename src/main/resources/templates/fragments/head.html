@@ -13,6 +13,9 @@
       var elem = document.querySelectorAll('.sidenav');
       var options = {edge: "left", preventScrolling: true};
       var instances = M.Sidenav.init(elem, options);
+
+      var elems2 = document.querySelectorAll('select');
+      M.FormSelect.init(elems2, {});
     });
   </script>
   <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">

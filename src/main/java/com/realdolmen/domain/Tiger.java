@@ -64,8 +64,5 @@ public class Tiger {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Tiger{id=" + id + ", name=" + name + '}';
-    }
+
 }

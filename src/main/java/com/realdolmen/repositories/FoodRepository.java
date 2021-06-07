@@ -36,11 +36,12 @@ public class FoodRepository {
     }
 
 
+
     public List<Food> findAllFoodByAnimalId(int animalId) {
         List<Food> foodList = new ArrayList<>(); /*I've put my list here, so I can also use it in the catch block.
          In that case it will just return an empty list instead of null. That way my application is less prone to NullPointerExceptions . */
         try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
-            PreparedStatement myStatement = myConnection.prepareStatement("select * from Food where animalId = ?");//Remember always use a parameterized (?) query, if you need to add values in your query!
+            PreparedStatement myStatement = myConnection.prepareStatement("select * from Food as f inner join TigerFood as tf on tf.foodId = f.id where tf.tigerId = ?");//Remember always use a parameterized (?) query, if you need to add values in your query!
             myStatement.setInt(1, animalId);
             ResultSet myResultSet = myStatement.executeQuery();
             while (myResultSet.next()) {
@@ -86,6 +87,23 @@ public class FoodRepository {
                 System.out.println(e);
                 e = e.getNextException();
             }
+        }
+    }
+
+    public Food findById(Integer id) {
+        try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
+            PreparedStatement myStatement = myConnection.prepareStatement("select * from Food where id = ?");//Remember always use a parameterized (?) query, if you need to add values in your query!
+            myStatement.setInt(1, id);
+            myStatement.execute();
+            ResultSet resultSet = myStatement.getResultSet();
+            resultSet.next();
+            return new Food(resultSet.getInt("id"), resultSet.getString("foodName"));
+        } catch (SQLException e) {
+            while (e != null) {
+                System.out.println(e);
+                e = e.getNextException();
+            }
+            return null;
         }
     }
 }
