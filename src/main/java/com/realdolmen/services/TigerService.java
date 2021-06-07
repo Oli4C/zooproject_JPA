@@ -12,34 +12,22 @@ import java.util.List;
 public class TigerService {
 
     private TigerRepository tigerRepository = new TigerRepository();
-    private FoodRepository foodRepository = new FoodRepository();
 
 
     public List<Tiger> getTigers() {
-        List<Tiger> tigers = tigerRepository.getTigersFromDb();
-        for (Tiger tiger : tigers) {
-            tiger.setFoods(foodRepository.findAllFoodByAnimalId(tiger.getId()));
-        }
-        return tigers;
+     return tigerRepository.getTigersFromDb();
     }
-
 
     public void addATiger(Tiger tiger) {
         tigerRepository.addATigerInDb(tiger);
-        for(Food food : tiger.getFoods()){
-            foodRepository.saveFoodForAnimalId(food,tiger.getId());
-        }
     }
 
     public Tiger findById(int id) {
-        Tiger tiger = tigerRepository.findById(id);
-        tiger.setFoods(foodRepository.findAllFoodByAnimalId(tiger.getId()));
-        return tiger;
+        return tigerRepository.findById(id);
     }
 
     public void updateTiger(Tiger tiger) {
         tigerRepository.updateTigerById(tiger);
-
     }
 
     public void removeById(int id) {

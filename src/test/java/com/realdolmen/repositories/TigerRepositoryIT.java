@@ -17,4 +17,11 @@ public class TigerRepositoryIT {
         Assertions.assertFalse(tiger.getName().isBlank());
         //TODO: use more assertions
     }
+
+    @Test
+    public void testSave(){
+        Tiger tiger = new Tiger();
+        tiger.setName("test");
+        myTigerRepository.addATigerInDb(tiger);
+    }
 }

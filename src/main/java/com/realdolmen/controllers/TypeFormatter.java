@@ -2,6 +2,7 @@ package com.realdolmen.controllers;
 import com.realdolmen.domain.Food;
 import com.realdolmen.services.FoodService;
 import org.springframework.format.Formatter;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;

@@ -1,24 +1,27 @@
 package com.realdolmen.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Food {
-    //TODO: add id and foodName fields + constructor + getters
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String foodName;
 
-    public Food(int id, String foodName) {
-        this.id = id;
-        this.foodName = foodName;
-    }
 
     public String getFoodName() {
         return foodName;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
