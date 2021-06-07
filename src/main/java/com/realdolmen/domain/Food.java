@@ -10,14 +10,6 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
-    }
-
     public String getFoodName() {
         return foodName;
     }
@@ -26,5 +18,16 @@ public class Food {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{ id= " + id + ", foodName= " + foodName + '}';
+    }
 }

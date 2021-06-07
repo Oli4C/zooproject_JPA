@@ -28,10 +28,6 @@ public class ActionsController {
     }
 
     @GetMapping(value = "/addAnimal")
-//    @RequestMapping(
-//            value = "/addAnimalPage",
-//            produces = "application/json",
-//            method = {RequestMethod.GET, RequestMethod.PUT})
     public String showAddPage(Model model){
         model.addAttribute("countries", countryService.getCountries());
         model.addAttribute("newTiger", new Tiger());
@@ -40,14 +36,15 @@ public class ActionsController {
     }
 
     @PostMapping(value = "/add")
-//    @RequestMapping(
-//            value = "/add",
-//            produces = "application/json",
-//            method = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
     public String add(@ModelAttribute Tiger newTiger) {
         tigerService.addATiger(newTiger);
         return "redirect:/";
     }
 
+    @GetMapping(value= "/remove/{id}")
+    public String deleteAGame(@PathVariable("id") int id) {
+        tigerService.removeById(id);
+        return "redirect:/";
+    }
 
 }

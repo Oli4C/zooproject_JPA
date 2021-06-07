@@ -1,12 +1,10 @@
 package com.realdolmen.repositories;
 
 import com.realdolmen.domain.Country;
-import com.realdolmen.domain.Food;
 import com.realdolmen.repositories.util.PropertiesLoader;
-
+import java.util.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class CountryRepository {
 
@@ -17,8 +15,9 @@ public class CountryRepository {
     public List<Country> findAll() {
         List<Country> countries = new ArrayList<>();
         try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
-            Statement myStatement = myConnection.createStatement();
-            ResultSet myResultSet = myStatement.executeQuery("select * from Country");
+            PreparedStatement myStatement = myConnection.prepareStatement("select * from Country");
+            myStatement.execute();
+            ResultSet myResultSet = myStatement.getResultSet();
 
             while (myResultSet.next()) {
                 int id = myResultSet.getInt("id");

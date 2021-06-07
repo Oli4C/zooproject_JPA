@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+
+
+<div class="container">
+    <form method="post" th:action="@{/addCountry}" th:object="${newCountry}">
+        <br>
+        <div class="row">
+            <div class="col m6">
+                <label for="countryName" class="form-label">Add a new country</label>
+                <input id="countryName" class="form-control" placeholder="Country name" name="name">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col m12">
+                <button id="submitbnt" type="submit" class="form-control btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

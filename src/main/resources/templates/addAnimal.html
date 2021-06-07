@@ -6,47 +6,48 @@
 
 <div th:insert="fragments/head :: nav"></div>
 
-<div class="container"></div>
-<form th:method="post" th:action="@{/add}" th:object="${newTiger}">
-  <div class="row">
-    <div class="col m6">
+<div class="container">
+    <form method="post" th:action="@{/add}" th:object="${newTiger}">
+        <br>
+        <div class="row">
+            <div class="col m6">
 
-      <label for="animalName" class="form-label">Add an animal</label>
-      <input id="animalName" class="form-control"
-             placeholder="Animal name"
-             name="name">
-    </div>
+                <label for="animalName" class="form-label">Add an animal</label>
+                <input id="animalName" class="form-control" placeholder="Animal name" name="name">
+            </div>
+        </div>
 
-    <div class="col m6">
-      <label for="country" class="form-label">Select a country</label>
-      <select th:field="*{country.id}" id="country">
-        <option
-                th:each="country : ${countries}"
-                th:text="${country.getName()}"
-                th:value="${country.id}">
+        <div class="row">
+            <div class="col m6">
+                <label for="country">Choose the country</label>
+                <select class="form-control" th:field="*{country.id}" id="country">
+                    <option th:each="country : ${countries}" th:text="${country.getName()}"
+                            th:value="${country.getId()}"> option
+                    </option>
+                </select>
+            </div>
+        </div>
 
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col m6">
-      <label for="foods">Select food(s)</label>
-      <select multiple class="form-control" th:field="*{foods}" id="foods">
-        <option th:each="food : ${foods}" th:text="${food.getFoodName()}"
-                th:value="${{food}}">
-        </option>
-      </select>
-    </div>
-  </div>
+        <div class="row">
+            <div class="col m6">
+                <label for="foods">Select food(s)</label>
+                <select multiple class="form-control" th:field="*{foods}" id="foods">
+                    <option th:each="food : ${foods}" th:text="${food.getFoodName()}"
+                            th:value="${{food}}"> option
+                    </option>
+                </select>
+            </div>
+        </div>
 
-  <div class="row">
-    <div class="col m12">
-      <input id="submitbnt" type="submit" class="form-control btn btn-primary" value="Save"/>
-    </div>
-  </div>
-</form>
+
+        <div class="row">
+            <div class="col m12">
+                <button id="submitbnt" type="submit" class="form-control btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
 </div>
+
 </body>
 </html>
 

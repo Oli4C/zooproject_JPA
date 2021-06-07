@@ -36,7 +36,6 @@ public class FoodRepository {
     }
 
 
-
     public List<Food> findAllFoodByAnimalId(int animalId) {
         List<Food> foodList = new ArrayList<>(); /*I've put my list here, so I can also use it in the catch block.
          In that case it will just return an empty list instead of null. That way my application is less prone to NullPointerExceptions . */
@@ -104,6 +103,20 @@ public class FoodRepository {
                 e = e.getNextException();
             }
             return null;
+        }
+    }
+
+    public void saveFoodForAnimalId(Food food, int id) {
+        try (Connection myConnection = DriverManager.getConnection(url, user, password);) {
+            PreparedStatement myStatement = myConnection.prepareStatement("insert  into TigerFood(tigerId,foodId) values(?,?) ");//Remember always use a parameterized (?) query, if you need to add values in your query!
+            myStatement.setInt(1, id);
+            myStatement.setInt(2, food.getId());
+            myStatement.execute();
+        } catch (SQLException e) {
+            while (e != null) {
+                System.out.println(e);
+                e = e.getNextException();
+            }
         }
     }
 }
