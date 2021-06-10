@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +49,9 @@ public class FoodRepository {
 
     public void saveFoodForAnimalId(Food food, int id) {
 
+    }
+    @Transactional
+    public void saveFood(Food newFood) {
+        entityManager.persist(newFood);
     }
 }

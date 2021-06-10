@@ -27,18 +27,22 @@ public class TigerRepository {
 
     @Transactional
     public void addATigerInDb(Tiger tiger) {
+
         entityManager.persist(tiger);
     }
 
-    public Tiger findById(int id) {
+    public Tiger findById(long id) {
         return entityManager.find(Tiger.class, id);
+
     }
 
+    @Transactional
     public void updateTigerById(Tiger tiger) {
         entityManager.merge(tiger);
     }
 
-    public void removeById(int id) {
+    @Transactional
+    public void removeById(long id) {
         Tiger tiger = findById(id);
         entityManager.remove(tiger);
     }

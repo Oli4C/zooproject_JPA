@@ -27,4 +27,8 @@ public class FoodService {
     public Food findById(Long id) {
         return foodRepository.findById(id);
     }
+
+    public void save(Food newFood) {
+        foodRepository.saveFood(newFood);
+    }
 }

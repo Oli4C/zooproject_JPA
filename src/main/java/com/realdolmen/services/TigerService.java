@@ -25,7 +25,7 @@ public class TigerService {
         tigerRepository.addATigerInDb(tiger);
     }
 
-    public Tiger findById(int id) {
+    public Tiger findById(long id) {
         return tigerRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class TigerService {
         tigerRepository.updateTigerById(tiger);
     }
 
-    public void removeById(int id) {
+    public void removeById(long id) {
         tigerRepository.removeById(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.realdolmen.controllers;
 
 import com.realdolmen.domain.Food;
+import com.realdolmen.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FoodController {
 
+    @Autowired
+    private FoodService foodService;
+
     @GetMapping("/addFood")
     public String showFood(Model model){
         model.addAttribute("newFood", new Food());
@@ -20,8 +24,8 @@ public class FoodController {
 
     @PostMapping("/saveFood")
     public String saveFood(@ModelAttribute Food newFood){
-        //TODO save food
-        return "/";
+        foodService.save(newFood);
+        return "redirect:/";
     }
 
 }
