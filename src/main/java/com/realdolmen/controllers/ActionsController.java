@@ -1,6 +1,7 @@
 package com.realdolmen.controllers;
 
 import com.realdolmen.domain.Tiger;
+import com.realdolmen.repositories.NotFoundException;
 import com.realdolmen.services.CountryService;
 import com.realdolmen.services.FoodService;
 import com.realdolmen.services.TigerService;
@@ -18,24 +19,24 @@ public class ActionsController {
     @Autowired
     private TigerService tigerService;
     @Autowired
-    private CountryService countryService ;
+    private CountryService countryService;
     @Autowired
-    private FoodService foodService ;
+    private FoodService foodService;
 
     @GetMapping(value = "/editPage/{id}")
-    public String showEditPage(@PathVariable("id") int id, Model model){
-        model.addAttribute("editanimal",tigerService.findById(id));
+    public String showEditPage(@PathVariable("id") int id, Model model) throws NotFoundException {
+        model.addAttribute("editanimal", tigerService.findById(id));
         return "edit";
     }
 
     @PostMapping(value = "/edit/{id}")
-    public String editTiger(@ModelAttribute Tiger tiger){
+    public String editTiger(@ModelAttribute Tiger tiger) {
         tigerService.updateTiger(tiger);
         return "redirect:/";
     }
 
     @GetMapping(value = "/addAnimal")
-    public String showAddPage(Model model){
+    public String showAddPage(Model model) {
         model.addAttribute("countries", countryService.getCountries());
         model.addAttribute("newTiger", new Tiger());
         model.addAttribute("foods", foodService.getAllFood());
@@ -43,13 +44,13 @@ public class ActionsController {
     }
 
     @PostMapping(value = "/add")
-    public String add(@ModelAttribute Tiger newTiger) {
+    public String add(@ModelAttribute Tiger newTiger, Model model) {
         tigerService.addATiger(newTiger);
         return "redirect:/";
     }
 
-    @GetMapping(value= "/remove/{id}")
-    public String deleteAGame(@PathVariable("id") Long id) {
+    @GetMapping(value = "/remove/{id}")
+    public String deleteAGame(@PathVariable("id") Long id) throws NotFoundException {
         tigerService.removeById(id);
         return "redirect:/";
     }

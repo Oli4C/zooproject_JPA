@@ -1,6 +1,5 @@
 package com.realdolmen.repositories;
 
-import com.realdolmen.domain.Food;
 import com.realdolmen.domain.Tiger;
 import org.springframework.stereotype.Repository;
 
@@ -26,14 +25,19 @@ public class TigerRepository {
         return findAllTigers;
     }
 
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public void addATigerInDb(Tiger tiger) {
         entityManager.persist(tiger);
     }
 
-    public Tiger findById(long id) {
+    public Tiger findById(long id) throws NotFoundException {
         TypedQuery<Tiger> query = entityManager.createQuery("select t From Tiger t where t.id = :id ", Tiger.class);
+        query.setLockMode(LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         query.setParameter("id", id);
+        int count = query.getFirstResult();
+        if(count == 0){
+            throw new NotFoundException("Tiger cannot be found!");
+        }
         return query.getSingleResult();
     }
 
@@ -43,8 +47,9 @@ public class TigerRepository {
     }
 
     @Transactional
-    public void removeById(long id) {
+    public void removeById(long id) throws NotFoundException {
         Tiger tiger = findById(id);
+
         entityManager.remove(tiger);
     }
 }

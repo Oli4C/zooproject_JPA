@@ -13,6 +13,9 @@ public class Tiger implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Version
+    private Integer version;
+
     @Column(nullable = false, length = 100)
     private String name; //moet private staan, encapsulation
 
@@ -87,4 +90,11 @@ public class Tiger implements Serializable {
         this.foods = foods;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 }

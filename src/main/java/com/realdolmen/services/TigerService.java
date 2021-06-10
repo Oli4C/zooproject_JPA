@@ -25,7 +25,7 @@ public class TigerService {
         tigerRepository.addATigerInDb(tiger);
     }
 
-    public Tiger findById(int id) {
+    public Tiger findById(int id) throws NotFoundException {
         return tigerRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class TigerService {
         tigerRepository.updateTigerById(tiger);
     }
 
-    public void removeById(long id) {
+    public void removeById(long id) throws NotFoundException {
         tigerRepository.removeById(id);
     }
 }

@@ -19,7 +19,7 @@ public class TigerRepositoryIT {
     }
 
     @Test
-    public void testSave(){
+    public void testSave() throws Exception {
         Tiger tiger = new Tiger();
         tiger.setName("test");
         myTigerRepository.addATigerInDb(tiger);
