@@ -1,5 +1,6 @@
 package com.realdolmen.repositories;
 
+import com.realdolmen.domain.Food;
 import com.realdolmen.domain.Tiger;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +22,8 @@ public class TigerRepository {
     }
 
     public List<Tiger> getTigersFromDb() {
-        TypedQuery<Tiger> tigers = entityManager.createQuery("select t from Tiger t", Tiger.class);
-        return tigers.getResultList();
+        List<Tiger> findAllTigers = entityManager.createNamedQuery("findAllTigers", Tiger.class).getResultList();
+        return findAllTigers;
     }
 
     @Transactional
@@ -30,15 +31,19 @@ public class TigerRepository {
         entityManager.persist(tiger);
     }
 
-    public Tiger findById(int id) {
-        return entityManager.find(Tiger.class, id);
+    public Tiger findById(long id) {
+        TypedQuery<Tiger> query = entityManager.createQuery("select t From Tiger t where t.id = :id ", Tiger.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 
+    @Transactional
     public void updateTigerById(Tiger tiger) {
         entityManager.merge(tiger);
     }
 
-    public void removeById(int id) {
+    @Transactional
+    public void removeById(long id) {
         Tiger tiger = findById(id);
         entityManager.remove(tiger);
     }

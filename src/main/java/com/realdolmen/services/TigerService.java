@@ -33,7 +33,7 @@ public class TigerService {
         tigerRepository.updateTigerById(tiger);
     }
 
-    public void removeById(int id) {
+    public void removeById(long id) {
         tigerRepository.removeById(id);
     }
 }
