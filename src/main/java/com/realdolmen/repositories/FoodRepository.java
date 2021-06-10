@@ -26,12 +26,7 @@ public class FoodRepository {
     }
 
     public List<Food> getAllFoodFromDb() {
-        return entityManager.createQuery("select f from Food f", Food.class).getResultList();
-    }
-
-
-    public List<Food> findAllFoodByAnimalId(int animalId) {
-        return null;
+        return entityManager.createNamedQuery("findAllFood", Food.class).getResultList();
     }
 
 
@@ -47,8 +42,9 @@ public class FoodRepository {
         return entityManager.find(Food.class,id);
     }
 
-    public void saveFoodForAnimalId(Food food, int id) {
-
+    @Transactional
+    public void save(Food newFood) {
+        entityManager.persist(newFood);
     }
     @Transactional
     public void saveFood(Food newFood) {

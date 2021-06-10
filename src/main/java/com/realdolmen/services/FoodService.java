@@ -29,6 +29,6 @@ public class FoodService {
     }
 
     public void save(Food newFood) {
-        foodRepository.saveFood(newFood);
+        foodRepository.save(newFood);
     }
 }
