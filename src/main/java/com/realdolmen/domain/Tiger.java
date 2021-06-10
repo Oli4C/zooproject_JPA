@@ -1,5 +1,7 @@
 package com.realdolmen.domain;
 
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -85,29 +87,4 @@ public class Tiger implements Serializable {
         this.foods = foods;
     }
 
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Tiger.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("name='" + name + "'")
-                .add("birthDate=" + birthDate)
-                .add("behavior=" + behavior)
-                .add("age=" + age)
-                .add("country=" + country)
-                .add("foods=" + foods)
-                .toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tiger tiger = (Tiger) o;
-        return age == tiger.age && Objects.equals(id, tiger.id) && Objects.equals(name, tiger.name) && Objects.equals(birthDate, tiger.birthDate) && behavior == tiger.behavior && Objects.equals(country, tiger.country) && Objects.equals(foods, tiger.foods);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, birthDate, behavior, age, country, foods);
-    }
 }

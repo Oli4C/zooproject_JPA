@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Service
+@Service
 public class FoodService {
-//    @Autowired
-    private FoodRepository foodRepository = new FoodRepository();
+    @Autowired
+    private FoodRepository foodRepository ;
 
     public List<Food> getAllFood() {
         return foodRepository.getAllFoodFromDb();
@@ -24,7 +24,7 @@ public class FoodService {
         foodRepository.updateFoodName(id, foodName);
     }
 
-    public Food findById(Integer id) {
+    public Food findById(Long id) {
         return foodRepository.findById(id);
     }
 }

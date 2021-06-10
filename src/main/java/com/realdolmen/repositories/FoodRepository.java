@@ -13,15 +13,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Repository
+@Repository
 public class FoodRepository {
 
-//    @PersistenceContext
+    @PersistenceContext
     private EntityManager entityManager;
 
     public FoodRepository() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("animalPu");
-        this.entityManager = emf.createEntityManager();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("animalPu");
+//        this.entityManager = emf.createEntityManager();
     }
 
     public List<Food> getAllFoodFromDb() {
@@ -42,7 +42,7 @@ public class FoodRepository {
 
     }
 
-    public Food findById(Integer id) {
+    public Food findById(Long id) {
         return entityManager.find(Food.class,id);
     }
 

@@ -5,13 +5,16 @@ import com.realdolmen.domain.Tiger;
 import com.realdolmen.repositories.FoodRepository;
 import com.realdolmen.repositories.NotFoundException;
 import com.realdolmen.repositories.TigerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public class TigerService {
 
-    private TigerRepository tigerRepository = new TigerRepository();
+    @Autowired
+    private TigerRepository tigerRepository ;
 
 
     public List<Tiger> getTigers() {

@@ -28,9 +28,4 @@ public class Food {
     public void setFoodName(String foodName) {
         this.foodName = foodName;
     }
-
-    @Override
-    public String toString() {
-        return "Food{ id= " + id + ", foodName= " + foodName + '}';
-    }
 }

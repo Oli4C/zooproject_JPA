@@ -9,18 +9,13 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-
+@Repository
 public class CountryRepository {
 
-//    @PersistenceContext
+    @PersistenceContext
     private EntityManager entityManager;
 
-    public CountryRepository() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("animalPu");
-        this.entityManager = emf.createEntityManager();
-    }
-
     public List<Country> findAll() {
-       return entityManager.createQuery("select c from Country c ", Country.class).getResultList();
+       return entityManager.createQuery("select c from Country c", Country.class).getResultList();
     }
 }
